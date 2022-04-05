@@ -17,4 +17,6 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long>{
 	//INSERT into users(first_name, last_name, password, email) VALUES (Datos de objeto Usuario)
 	Usuario save(Usuario nuevoUsuario);
 	
+	void deleteById(Long id);
+	
 }

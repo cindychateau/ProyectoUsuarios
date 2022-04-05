@@ -27,12 +27,19 @@
 					<td><c:out value="${usuario.getFirst_name()}" /></td>
 					<td><c:out value="${usuario.getLast_name()}" /></td>
 					<td><c:out value="${usuario.getEmail()}" /></td>
-					<td></td>
+					<td>
+						<form action="/delete/${usuario.getId()}" method="POST">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn btn-danger">
+								Eliminar
+							</button>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
-	
+	<a href="/new" class="btn btn-primary">Agregar Usuario</a>
 </body>
 </html>

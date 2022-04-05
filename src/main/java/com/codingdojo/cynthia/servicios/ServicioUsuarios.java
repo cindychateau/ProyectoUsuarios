@@ -31,4 +31,12 @@ public class ServicioUsuarios {
 		}
 	}
 	
+	public Usuario save_user(Usuario nuevoUsuario) {
+		return repositorio.save(nuevoUsuario);
+	}
+	
+	public void delete_user(Long id) {
+		repositorio.deleteById(id);
+	}
+	
 }

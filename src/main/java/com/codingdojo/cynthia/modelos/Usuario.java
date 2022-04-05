@@ -24,7 +24,7 @@ public class Usuario {
 	private Long id;
 	
 	@NotNull
-	@Size(min=2, max=100)
+	@Size(min=2, max=100, message="El nombre debe de ser de al menos 2 caracteres")
 	private String first_name;
 	
 	@NotNull
