@@ -14,9 +14,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.cynthia.modelos.Usuario;
+import com.codingdojo.cynthia.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorUsuariosPlantilla {
+	
+	private final ServicioUsuarios servicio;
+	
+	public ControladorUsuariosPlantilla(ServicioUsuarios servicio) {
+		this.servicio = servicio;
+	}
+	
+	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
+	public String dashboard(Model model) {
+		
+		List<Usuario> usuarios = servicio.get_all();
+		
+		model.addAttribute("usuarios", usuarios);
+		
+		return "dashboard.jsp";
+	}
+	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index() {
@@ -26,17 +44,17 @@ public class ControladorUsuariosPlantilla {
 	@RequestMapping(value="/muestraUsuario", method=RequestMethod.GET)
 	public String muestraUsuario(Model model) {
 		
-		Usuario user1 = new Usuario("Cynthia", "Castillo", 1);
-		Usuario user2 = new Usuario("Valeria", "Romero", 2);
+		/*Usuario user1 = new Usuario("Cynthia", "Castillo", 1);
+		Usuario user2 = new Usuario("Valeria", "Romero", 2);*/
 		
 		model.addAttribute("titulo", "Usuarios");
 		
-		ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+		//ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		
-		listaUsuarios.add(user1);
-		listaUsuarios.add(user2);
+		/*listaUsuarios.add(user1);
+		listaUsuarios.add(user2);*/
 		
-		model.addAttribute("listaUsuarios", listaUsuarios);
+		//model.addAttribute("listaUsuarios", listaUsuarios);
 		
 		HashMap<String, String> paises = new HashMap<String, String>();
 		
@@ -85,11 +103,6 @@ public class ControladorUsuariosPlantilla {
 		session.setAttribute("nombre_sesion", nombre);
 		
 		return "redirect:/dashboard";
-	}
-	
-	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
-	public String dashboard() {
-		return "dashboard.jsp";
 	}
 	
 	
