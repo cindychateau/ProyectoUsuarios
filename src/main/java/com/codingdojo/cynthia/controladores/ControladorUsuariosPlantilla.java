@@ -139,5 +139,47 @@ public class ControladorUsuariosPlantilla {
 		return "redirect:/dashboard";
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "login.jsp";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(@RequestParam(value="email") String email,
+						@RequestParam(value="password") String password,
+						HttpSession session,
+						RedirectAttributes flash) {
+		
+		List<String> mensajes_error = new ArrayList<String>();
+		boolean isValid = true;
+		
+		if(email.equals("")) {
+			mensajes_error.add("Ingrese su correo");
+			isValid = false;
+		}
+		
+		if(password.equals("")) {
+			mensajes_error.add("Ingrese su password");
+			isValid = false;
+		}
+		
+		if(isValid) {
+			Usuario usuarioEncontrado = servicio.check_email_password(email, password);
+			if(usuarioEncontrado == null) {
+				mensajes_error.add("Credenciales incorrectas");
+				flash.addFlashAttribute("error_login", mensajes_error);
+				return "redirect:/login";
+				
+			}else {
+				session.setAttribute("nombre", usuarioEncontrado.getFirst_name());
+				return "redirect:/dashboard";
+			}
+		} else {
+			flash.addFlashAttribute("error_login", mensajes_error);
+			return "redirect:/login";
+		}
+		
+	}
+	
 	
 }

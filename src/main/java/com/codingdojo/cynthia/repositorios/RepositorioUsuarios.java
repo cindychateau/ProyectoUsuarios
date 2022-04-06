@@ -19,4 +19,7 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long>{
 	
 	void deleteById(Long id);
 	
+	//SELECT * FROM users WHERE email = '<EMAIL>' AND password = '<PASSWORD>'
+	List<Usuario> findByEmailAndPassword(String email, String password); 
+	
 }

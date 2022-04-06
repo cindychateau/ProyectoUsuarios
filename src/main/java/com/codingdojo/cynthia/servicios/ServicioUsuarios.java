@@ -39,4 +39,13 @@ public class ServicioUsuarios {
 		repositorio.deleteById(id);
 	}
 	
+	public Usuario check_email_password(String email, String password) {
+		List<Usuario> usuarioEncontrado = repositorio.findByEmailAndPassword(email, password);
+		if(usuarioEncontrado.isEmpty()) {
+			return null;
+		} else {
+			return usuarioEncontrado.get(0);
+		}
+	}
+	
 }
