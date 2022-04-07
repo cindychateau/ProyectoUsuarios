@@ -33,6 +33,15 @@
 			<form:errors path="password"/>
 		</div>
 		
+		<div class="form-group">
+			<form:label path="salon">Salon</form:label>
+			<form:select path="salon" class="form-control">
+				<c:forEach var="s" items="${salones}">
+					<form:option value="${s.id}"> ${s.name} </form:option>
+				</c:forEach>
+			</form:select>
+		</div>
+		
 		<!--label for="nombre">Nombre:</label>
 		<input type="text" name="nombre"><br>
 		<label for="email">Email:</label>

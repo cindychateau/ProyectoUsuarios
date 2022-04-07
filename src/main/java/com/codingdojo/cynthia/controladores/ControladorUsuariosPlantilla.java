@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingdojo.cynthia.modelos.Salon;
 import com.codingdojo.cynthia.modelos.Usuario;
 import com.codingdojo.cynthia.servicios.ServicioUsuarios;
 
@@ -43,7 +44,12 @@ public class ControladorUsuariosPlantilla {
 	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
-	public String register(@ModelAttribute("usuario") Usuario usuario) {
+	public String register(@ModelAttribute("usuario") Usuario usuario, Model model) {
+		
+		List<Salon> lista_salones = servicio.get_salones();
+		
+		model.addAttribute("salones", lista_salones);
+		
 		return "registro.jsp";
 	}
 	
