@@ -34,6 +34,7 @@
 								Eliminar
 							</button>
 						</form>
+						<a href="/show/${usuario.getId()}" class="btn btn-warning">Ver</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -41,5 +42,6 @@
 		</tbody>
 	</table>
 	<a href="/new" class="btn btn-primary">Agregar Usuario</a>
+	<a href="/direcciones/new" class="btn btn-primary">Agregar Dirección</a>
 </body>
 </html>

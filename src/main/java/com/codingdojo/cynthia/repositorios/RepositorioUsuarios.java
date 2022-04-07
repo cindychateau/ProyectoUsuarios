@@ -22,4 +22,7 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long>{
 	//SELECT * FROM users WHERE email = '<EMAIL>' AND password = '<PASSWORD>'
 	List<Usuario> findByEmailAndPassword(String email, String password); 
 	
+	List<Usuario> findByDireccionIdIsNull();
+	
+	
 }
