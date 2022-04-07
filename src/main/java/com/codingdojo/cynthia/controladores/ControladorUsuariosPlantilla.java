@@ -56,9 +56,14 @@ public class ControladorUsuariosPlantilla {
 	@PostMapping("/create")
 	//@RequestMapping(value="/new", method=RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("usuario") Usuario usuario,
-						 BindingResult result) {
+						 BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
+			
+			List<Salon> lista_salones = servicio.get_salones();
+			
+			model.addAttribute("salones", lista_salones);
+			
 			return "registro.jsp";
 		} else {
 			

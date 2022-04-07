@@ -36,9 +36,13 @@ public class ControladorDirecciones {
 	}
 	
 	@PostMapping("/create")
-	public String create_direccion(@Valid @ModelAttribute("direccion") Direccion direccion, BindingResult result) {
+	public String create_direccion(@Valid @ModelAttribute("direccion") Direccion direccion, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
+			List<Usuario> sindireccion = servicio.get_users_no_address();
+			
+			model.addAttribute("usuarios_sindireccion", sindireccion);
+			
 			return "/direcciones/new.jsp";
 		} else {
 			servicio.save_direccion(direccion);
