@@ -35,6 +35,7 @@
 							</button>
 						</form>
 						<a href="/show/${usuario.getId()}" class="btn btn-warning">Ver</a>
+						<a href="/asignar/${usuario.getId()}" class="btn btn-primary">Asignar Hobby</a>
 					</td>
 				</tr>
 			</c:forEach>

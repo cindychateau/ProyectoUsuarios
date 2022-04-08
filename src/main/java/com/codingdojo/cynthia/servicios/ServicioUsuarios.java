@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.codingdojo.cynthia.modelos.Direccion;
+import com.codingdojo.cynthia.modelos.Hobby;
 import com.codingdojo.cynthia.modelos.Salon;
 import com.codingdojo.cynthia.modelos.Usuario;
 import com.codingdojo.cynthia.repositorios.RepositorioDirecciones;
+import com.codingdojo.cynthia.repositorios.RepositorioHobbies;
 import com.codingdojo.cynthia.repositorios.RepositorioSalones;
 import com.codingdojo.cynthia.repositorios.RepositorioUsuarios;
 
@@ -19,13 +21,16 @@ public class ServicioUsuarios {
 	private final RepositorioUsuarios repositorio;
 	private final RepositorioDirecciones repositorio_dir;
 	private final RepositorioSalones repositorio_sal;
+	private final RepositorioHobbies repositorio_hob;
 	
 	public ServicioUsuarios(RepositorioUsuarios repositorio, 
 							RepositorioDirecciones repositorio_dir,
-							RepositorioSalones repositorio_sal) {
+							RepositorioSalones repositorio_sal,
+							RepositorioHobbies repositorio_hob) {
 		this.repositorio = repositorio;
 		this.repositorio_dir = repositorio_dir;
 		this.repositorio_sal = repositorio_sal;
+		this.repositorio_hob = repositorio_hob;
 	}
 	
 	public List<Usuario> get_all() {
@@ -77,6 +82,40 @@ public class ServicioUsuarios {
 		} else {
 			return null;
 		}
+	}
+	
+	public List<Hobby> get_hobbies(){
+		return repositorio_hob.findAll();
+	}
+	
+	public Hobby find_hobby(Long id) {
+		Optional<Hobby> optionalHobby = repositorio_hob.findById(id);
+		if(optionalHobby.isPresent()) {
+			return optionalHobby.get();
+		} else {
+			return null;
+		}
+	}
+	
+	//user_id= 1
+	//hobby_id= 2
+	//usuario_con_hobby = Elena
+	//hobby_para_usuario = Correr
+	//lista_hobbies = ["Programar en Java", "Hacer ejercicio"]
+	//lista_hobbies = ["Programar en Java", "Hacer ejercicio", "Correr"]
+	//GUARDA ELENA
+	public void saveHobbyUsuario(Long hobby_id, Long user_id) {
+		Usuario usuario_con_hobby = find_user(user_id);
+		
+		Hobby hobby_para_usuario = find_hobby(hobby_id);
+		
+		List<Hobby> lista_hobbies = usuario_con_hobby.getHobbies();
+		
+		lista_hobbies.add(hobby_para_usuario);
+		
+		repositorio.save(usuario_con_hobby);
+		
+		
 	}
 	
 }

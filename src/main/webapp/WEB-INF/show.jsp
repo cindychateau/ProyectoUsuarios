@@ -22,6 +22,14 @@
 			<c:out value="${usuario.direccion.getCp()}" /> 
 			<c:out value="${usuario.direccion.getCountry()}" />
 		</p>
+		<p>
+			Hobbies:
+		</p>
+		<ul>
+			<c:forEach var="hobby" items="${usuario.hobbies}">
+			<li><c:out value="${hobby.getName()}"/></li>
+			</c:forEach>
+		</ul>
 		<a href="/dashboard" class="btn btn-primary">Regresar</a>
 	</div>
 </body>
